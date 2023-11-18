@@ -1,5 +1,5 @@
 select
-    resetlogs_time,
+    -- resetlogs_time,
     dest_id,
     sequence# as sequence_number,
     -- cast(cast(first_time as timestamp with time zone) at time zone 'UTC' as DATE) as "FIRST_TIME",
