@@ -74,7 +74,7 @@ def main():
 #            )
 
 # ajout debug
-            data.point = {
+            data_point = {
                 "measurement": measurement_name,
                 "tags": {
                     "host_name": host_name,
