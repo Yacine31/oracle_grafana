@@ -101,7 +101,7 @@ def main():
         print("Data Points:")
         for data_point in data:
            print(data_point)
-        fin ajout debug
+        # fin ajout debug
 
         # Connexion à InfluxDB
         if args.verbose:
