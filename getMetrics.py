@@ -61,17 +61,44 @@ def main():
 
         # Itération sur chaque ligne
         for result in results:
-            data.append(
-                {
-                    "measurement": measurement_name,
-                    "tags": {
-                        "host_name": host_name,
-                        "instance_name": instance_name
-                    },
-                    "fields": {column_names[i]: float(result[i]) if isinstance(result[i], int) else result[i] for i in range(len(column_names))}
-                    # "fields": {column_names[i]: result[i] for i in range(len(column_names))}
-                }
-            )
+#            data.append(
+#                {
+#                    "measurement": measurement_name,
+#                    "tags": {
+#                        "host_name": host_name,
+#                        "instance_name": instance_name
+#                    },
+#                    "fields": {column_names[i]: float(result[i]) if isinstance(result[i], int) else result[i] for i in range(len(column_names))}
+#                    # "fields": {column_names[i]: result[i] for i in range(len(column_names))}
+#                }
+#            )
+
+# ajout debug
+            data.point = {
+                "measurement": measurement_name,
+                "tags": {
+                    "host_name": host_name,
+                    "instance_name": instance_name
+                },
+                "fields": {column_names[i]: float(result[i]) if isinstance(result[i], int) else result[i] for i in range(len(column_names))}
+                # "fields": {column_names[i]: result[i] for i in range(len(column_names))}
+            }
+
+            data.append(data_point)
+
+            # Affichage de chaque couple column_names[i] et result[i]
+            for i in range(len(column_names)):
+                print(f"{column_names[i]}: {result[i]}")
+
+            # Ajoutez une ligne vide pour séparer les résultats de chaque itération
+            print("\n")
+
+        # Affichage du dictionnaire complet après la boucle
+        print("Data Points:")
+        for data_point in data:
+            print(data_point)
+# fin ajout debug
+
 
         # Connexion à InfluxDB
         if args.verbose:
