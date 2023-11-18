@@ -59,46 +59,49 @@ def main():
         # Création des données à injecter dans InfluxDB
         data = []
 
-        # Itération sur chaque ligne
-        for result in results:
-#            data.append(
-#                {
-#                    "measurement": measurement_name,
-#                    "tags": {
-#                        "host_name": host_name,
-#                        "instance_name": instance_name
-#                    },
-#                    "fields": {column_names[i]: float(result[i]) if isinstance(result[i], int) else result[i] for i in range(len(column_names))}
-#                    # "fields": {column_names[i]: result[i] for i in range(len(column_names))}
-#                }
-#            )
-
-# ajout debug
-            data_point = {
-                "measurement": measurement_name,
-                "tags": {
-                    "host_name": host_name,
-                    "instance_name": instance_name
-                },
-                "fields": {column_names[i]: float(result[i]) if isinstance(result[i], int) else result[i] for i in range(len(column_names))}
-                # "fields": {column_names[i]: result[i] for i in range(len(column_names))}
-            }
+        if measurement_name=='TablespaceInfo':
+            # Cas des données pour les tablespaces
+            for result in results:
+                data_point = {
+                    "measurement": "tablespaceinfo",
+                    "tags": {
+                        "host_name": result['HOST_NAME'],
+                        "db_unique_name": result['DB_UNIQUE_NAME'],
+                        "tablespace_name": result['TABLESPACE_NAME'],
+                        "contents": result['CONTENTS']
+                    },
+                    "fields": {
+                        "allocated": float(result['MEGS_ALLOC']),
+                        "used": float(result['MEGS_USED']),
+                        "free": float(result['MEGS_FREE']),
+                        "max_size": float(result['MAX']),
+                        "pct_used": float(result['PCT_USED']),
+                        "pct_free": float(result['PCT_FREE']),
+                        "pct_used_max": float(result['PCT_USED_MAX']),
+                        "pct_free_max": float(result['PCT_FREE_MAX']),
+                    }
+                }
+            data.append(data_point)
+       else:
+            # Itération sur chaque ligne
+            for result in results:
+                data_point = {
+                    "measurement": measurement_name,
+                    "tags": {
+                        "host_name": host_name,
+                        "instance_name": instance_name
+                    },
+                    "fields": {column_names[i]: float(result[i]) if isinstance(result[i], int) else result[i] for i in range(len(column_names))}
+                    # "fields": {column_names[i]: result[i] for i in range(len(column_names))}
+                }
 
             data.append(data_point)
 
-            # Affichage de chaque couple column_names[i] et result[i]
-            # for i in range(len(column_names)):
-            #     print(f"{column_names[i]}: {result[i]}")
-
-            # Ajoutez une ligne vide pour séparer les résultats de chaque itération
-            # print("\n")
-
         # Affichage du dictionnaire complet après la boucle
-        # print("Data Points:")
-        # for data_point in data:
-        #    print(data_point)
-# fin ajout debug
-
+        print("Data Points:")
+        for data_point in data:
+           print(data_point)
+        fin ajout debug
 
         # Connexion à InfluxDB
         if args.verbose:
