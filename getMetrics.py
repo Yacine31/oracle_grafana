@@ -82,7 +82,7 @@ def main():
                     }
                 }
             data.append(data_point)
-       else:
+        else:
             # Itération sur chaque ligne
             for result in results:
                 data_point = {
