@@ -3,8 +3,17 @@
 
 Pour collecter les infos : 
 
-getMetrics.py --sid ORCL --influxdb-host srvorap --influxdb-port 8086 --influxdb-database influx --sql-directory sql
+Se connecter avec le compte oracle :
 
-Pour couvrir toutes les bases de ce serveur : utiliser le script getMetrics.sh
+wget https://bootstrap.pypa.io/pip/3.6/get-pip.py -O get-pip.py
+python3 get-pip.py
+pip install cx-Oracle
+pip install influxdb
+sh getMetrics.sh
+
+Il appelle le script : 
+	getMetrics.py --sid ORCL --influxdb-host srvorap --influxdb-port 8086 --influxdb-database influx --sql-directory sql
+
+
 
 
