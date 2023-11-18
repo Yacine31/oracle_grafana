@@ -1,0 +1,5 @@
+select
+    sum(PERCENT_SPACE_USED) - sum(PERCENT_SPACE_RECLAIMABLE) PERCENT_SPACE_USED,
+    sum(PERCENT_SPACE_RECLAIMABLE) PERCENT_RECLAIMABLE
+from
+    v$flash_recovery_area_usage
