@@ -8,4 +8,4 @@ select
         b.output_bytes
 FROM v$rman_backup_job_details b
 WHERE b.start_time > (SYSDATE - 30)
-ORDER BY b.start_time desc
+ORDER BY b.start_time asc
