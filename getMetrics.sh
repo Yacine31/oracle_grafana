@@ -6,6 +6,6 @@ do
         
         export script_dir=/home/oracle/oracle_grafana
 
-        /usr/bin/python3 ${script_dir}/getMetrics.py --sid ORCL --influxdb-host srvorap --influxdb-port 8086 --influxdb-database influx --sql-directory ${script_dir}/sql
+        /usr/bin/python3 ${script_dir}/getMetrics.py --sid $r --influxdb-host srvorap --influxdb-port 8086 --influxdb-database influx --sql-directory ${script_dir}/sql
 
 done
