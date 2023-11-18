@@ -8,9 +8,8 @@ def main():
     parser.add_argument('--influxdb-host', required=True, help='InfluxDB host')
     parser.add_argument('--influxdb-port', required=True, help='InfluxDB port')
     parser.add_argument('--influxdb-database', required=True, help='InfluxDB database name')
-
     parser.add_argument('--sql-directory', required=True, help='Directory containing SQL files')
-
+    parser.add_argument('--sid', action='store_true', help='Oracle SID')
     parser.add_argument('--verbose', action='store_true', help='Enable verbose mode')
 
     args = parser.parse_args()
@@ -18,7 +17,7 @@ def main():
     # Connexion à la base de données Oracle
     if args.verbose:
         print(f"Connecting to Oracle database at / as sysdba ")
-    os.environ["ORACLE_SID"] = "ORCL"
+    os.environ["ORACLE_SID"] = args.sql_directory
     oracle_connection = cx_Oracle.connect( '/', mode = cx_Oracle.SYSDBA)
     oracle_cursor = oracle_connection.cursor()
     oracle_cursor.execute("select HOST_NAME, INSTANCE_NAME from v$instance")
