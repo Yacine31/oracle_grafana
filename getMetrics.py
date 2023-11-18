@@ -94,7 +94,6 @@ def main():
                     "fields": {column_names[i]: float(result[i]) if isinstance(result[i], int) else result[i] for i in range(len(column_names))}
                     # "fields": {column_names[i]: result[i] for i in range(len(column_names))}
                 }
-
             data.append(data_point)
 
         # Affichage du dictionnaire complet après la boucle
