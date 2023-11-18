@@ -87,11 +87,11 @@ def main():
             data.append(data_point)
 
             # Affichage de chaque couple column_names[i] et result[i]
-            for i in range(len(column_names)):
-                print(f"{column_names[i]}: {result[i]}")
+            # for i in range(len(column_names)):
+            #     print(f"{column_names[i]}: {result[i]}")
 
             # Ajoutez une ligne vide pour séparer les résultats de chaque itération
-            print("\n")
+            # print("\n")
 
         # Affichage du dictionnaire complet après la boucle
         print("Data Points:")
