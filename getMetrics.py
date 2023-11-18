@@ -94,9 +94,9 @@ def main():
             # print("\n")
 
         # Affichage du dictionnaire complet après la boucle
-        print("Data Points:")
-        for data_point in data:
-            print(data_point)
+        # print("Data Points:")
+        # for data_point in data:
+        #    print(data_point)
 # fin ajout debug
 
 
