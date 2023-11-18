@@ -3,7 +3,7 @@ select
     dest_id,
     sequence# as sequence_number,
     cast(cast(first_time as timestamp with time zone) at time zone 'UTC' as DATE) as "FIRST_TIME",
-    completion_time,
+    -- completion_time,
     blocks*block_size as bytes
 from 
     v$archived_log 
