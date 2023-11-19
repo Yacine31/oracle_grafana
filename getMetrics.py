@@ -59,7 +59,22 @@ def main():
         # Création des données à injecter dans InfluxDB
         data = []
 
-        if measurement_name=='TablespaceInfo':
+        if measurement_name=='SGAstat':
+            # Cas des données pour les tablespaces
+            for result in results:
+                data_point = {
+                    "measurement": measurement_name,
+                    "tags": {
+                        "host_name": host_name,
+                        "instance_name": instance_name,
+                        "component": result[column_names.index('component')]
+                    },
+                    "fields": {
+                        "size_mb": float(result[column_names.index('size_mb')])
+                    }
+                }
+                data.append(data_point)
+        elif measurement_name=='TablespaceInfo':
             # Cas des données pour les tablespaces
             for result in results:
                 data_point = {
