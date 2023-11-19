@@ -65,8 +65,8 @@ def main():
                 data_point = {
                     "measurement": measurement_name,
                     "tags": {
-                        "host_name": result['HOST_NAME'],
-                        "db_unique_name": result['DB_UNIQUE_NAME'],
+                        "host_name": host_name,
+                        "instance_name": instance_name,
                         "tablespace_name": result['TABLESPACE_NAME'],
                         "contents": result['CONTENTS']
                     },
