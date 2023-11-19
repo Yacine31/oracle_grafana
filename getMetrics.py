@@ -84,7 +84,7 @@ def main():
                         "instance_name": instance_name
                     },
                     "fields": {
-                        "message_text": int(result[column_names.index('MESSAGE_TEXT')])
+                        "message_text": result[column_names.index('MESSAGE_TEXT')]
                     }
                 }
                 data.append(data_point)
