@@ -83,7 +83,6 @@ def main():
                         "host_name": host_name,
                         "instance_name": instance_name
                     },
-                    "time": result[column_names.index('SYSDATE')],
                     "fields": {
                         "message_text": int(result[column_names.index('MESSAGE_TEXT')])
                     }
