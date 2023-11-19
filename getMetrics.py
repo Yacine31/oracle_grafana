@@ -82,6 +82,23 @@ def main():
                     }
                 }
                 data.append(data_point)
+        elif measurement_name=='WaitclassMetrics':
+            # Cas des données pour les WaitclassMetrics
+            for result in results:
+                data_point = {
+                    "measurement": measurement_name,
+                    "tags": {
+                        "host_name": host_name,
+                        "instance_name": instance_name,
+                        "wait_class": result[column_names.index('WAIT_CLASS')],
+                    },
+                    "fields": {
+                        "min_value": float(Metric['MIN_VALUE']),
+                        "avg_value": float(Metric['AVG_VALUE']),
+                        "max_value": float(Metric['MAX_VALUE'])
+                    }
+                }
+                data.append(data_point)
         else:
             # Itération sur chaque ligne
             for result in results:
