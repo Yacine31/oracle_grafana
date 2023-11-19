@@ -88,6 +88,22 @@ def main():
                     }
                 }
                 data.append(data_point)
+        elif measurement_name=='SchemaSize':
+            # Cas des données pour les SchemaSize
+            for result in results:
+                data_point = {
+                    "measurement": measurement_name,
+                    "tags": {
+                        "host_name": host_name,
+                        "instance_name": instance_name,
+                        "owner": result[column_names.index('OWNER')]
+                    },
+                    "fields": {
+                        "schema_size": int(result[column_names.index('SCHEMA_SIZE')]),
+                        "default_tablespace": result[column_names.index('DEFAULT_TABLESPACE')]
+                    }
+                }
+                data.append(data_point)
         elif measurement_name=='Sessions':
             # Cas des données pour les Sessions
             for result in results:
