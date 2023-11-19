@@ -67,18 +67,18 @@ def main():
                     "tags": {
                         "host_name": host_name,
                         "instance_name": instance_name,
-                        "tablespace_name": result['TABLESPACE_NAME'],
-                        "contents": result['CONTENTS']
+                        "tablespace_name": result[column_names.index('TABLESPACE_NAME')],
+                        "contents": result[column_names.index('CONTENTS')]
                     },
                     "fields": {
-                        "allocated": float(result['MEGS_ALLOC']),
-                        "used": float(result['MEGS_USED']),
-                        "free": float(result['MEGS_FREE']),
-                        "max_size": float(result['MAX']),
-                        "pct_used": float(result['PCT_USED']),
-                        "pct_free": float(result['PCT_FREE']),
-                        "pct_used_max": float(result['PCT_USED_MAX']),
-                        "pct_free_max": float(result['PCT_FREE_MAX']),
+                        "allocated": float(result[column_names.index('MEGS_ALLOC')]),
+                        "used": float(result[column_names.index('MEGS_USED')]),
+                        "free": float(result[column_names.index('MEGS_FREE')]),
+                        "max_size": float(result[column_names.index('MAX')]),
+                        "pct_used": float(result[column_names.index('PCT_USED')]),
+                        "pct_free": float(result[column_names.index('PCT_FREE')]),
+                        "pct_used_max": float(result[column_names.index('PCT_USED_MAX')]),
+                        "pct_free_max": float(result[column_names.index('PCT_FREE_MAX')]),
                     }
                 }
                 data.append(data_point)
