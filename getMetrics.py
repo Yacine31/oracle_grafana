@@ -77,8 +77,6 @@ def main():
         elif measurement_name=='Sessions':
             # Cas des données pour les Sessions
             for result in results:
-                result[column_names.index('MACHINE')]=result[column_names.index('MACHINE')].replace('\x00','') # Get rid of the \x00 that are sometimes there...
-                result[column_names.index('PROGRAM')]=result[column_names.index('PROGRAM')].replace('\x00','') # Get rid of the \x00 that are sometimes there...
                 data_point = {
                     "measurement": measurement_name,
                     "tags": {
