@@ -74,6 +74,25 @@ def main():
                     }
                 }
                 data.append(data_point)
+        elif measurement_name=='Sessions':
+            # Cas des données pour les Sessions
+            for result in results:
+                result[column_names.index('MACHINE')]=result[column_names.index('MACHINE')].replace('\x00','') # Get rid of the \x00 that are sometimes there...
+                result[column_names.index('PROGRAM')]=result[column_names.index('PROGRAM')].replace('\x00','') # Get rid of the \x00 that are sometimes there...
+                data_point = {
+                    "measurement": measurement_name,
+                    "tags": {
+                        "host_name": host_name,
+                        "instance_name": instance_name,
+                        "username": result[column_names.index('USERNAME')],
+                        "machine": result[column_names.index('MACHINE')],
+                        "program": result[column_names.index('PROGRAM')]
+                    },
+                    "fields": {
+                        "session_count": int(result[column_names.index('SESSION_COUNT')])
+                    }
+                }
+                data.append(data_point)
         elif measurement_name=='TablespaceDetail':
             # Cas des données pour les tablespaces avec detail
             for result in results:
