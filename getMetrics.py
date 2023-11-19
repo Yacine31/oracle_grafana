@@ -93,9 +93,9 @@ def main():
                         "wait_class": result[column_names.index('WAIT_CLASS')],
                     },
                     "fields": {
-                        "min_value": float(Metric['MIN_VALUE']),
-                        "avg_value": float(Metric['AVG_VALUE']),
-                        "max_value": float(Metric['MAX_VALUE'])
+                        "min_value": float(result[column_names.index('MIN_VALUE')]),
+                        "avg_value": float(result[column_names.index('AVG_VALUE')]),
+                        "max_value": float(result[column_names.index('MAX_VALUE')])
                     }
                 }
                 data.append(data_point)
