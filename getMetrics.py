@@ -74,6 +74,24 @@ def main():
                     }
                 }
                 data.append(data_point)
+        elif measurement_name=='TablespaceDetail':
+            # Cas des données pour les tablespaces avec detail
+            for result in results:
+                data_point = {
+                    "measurement": measurement_name,
+                    "tags": {
+                        "host_name": host_name,
+                        "instance_name": instance_name,
+                        "tablespace_name": result[column_names.index('TABLESPACE_NAME')],
+                    },
+                    "fields": {
+                        "taille_mib": float(result[column_names.index('TAILLE_MIB')]),
+                        "taille_max_mib": float(result[column_names.index('TAILLE_MAX_MIB')]),
+                        "taille_occupee_mib": float(result[column_names.index('TAILLE_OCCUPEE_MIB')]),
+                        "pct_occupation_theorique": float(result[column_names.index('PCT_OCCUPATION_THEORIQUE')])
+                    }
+                }
+                data.append(data_point)
         elif measurement_name=='TablespaceInfo':
             # Cas des données pour les tablespaces
             for result in results:
