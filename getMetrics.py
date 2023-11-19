@@ -81,7 +81,7 @@ def main():
                         "pct_free_max": float(result['PCT_FREE_MAX']),
                     }
                 }
-            # data.append(data_point)
+                data.append(data_point)
         else:
             # Itération sur chaque ligne
             for result in results:
@@ -94,7 +94,7 @@ def main():
                     "fields": {column_names[i]: float(result[i]) if isinstance(result[i], int) else result[i] for i in range(len(column_names))}
                     # "fields": {column_names[i]: result[i] for i in range(len(column_names))}
                 }
-        data.append(data_point)
+                data.append(data_point)
 
         # Affichage du dictionnaire complet après la boucle
         print("Data Points:")
