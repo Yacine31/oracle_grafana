@@ -84,7 +84,6 @@ def main():
                         "instance_name": instance_name
                     },
                     "fields": {
-                        "message_date": result[column_names.index('MESSAGE_DATE')],
                         "message_text": result[column_names.index('MESSAGE_TEXT')]
                     }
                 }
