@@ -67,10 +67,10 @@ def main():
                     "tags": {
                         "host_name": host_name,
                         "instance_name": instance_name,
-                        "component": result[column_names.index('component')]
+                        "component": result[column_names.index('COMPONENT')]
                     },
                     "fields": {
-                        "size_mb": float(result[column_names.index('size_mb')])
+                        "size_mb": float(result[column_names.index('SIZE_MB')])
                     }
                 }
                 data.append(data_point)
