@@ -4,7 +4,7 @@ from
     (
         select
             ds.owner,
-            round(sum(ds.bytes) / 1024 / 1024) schema_size_mega,
+            sum(ds.bytes) schema_size,
             du.default_tablespace
         from
             dba_segments ds,
