@@ -74,6 +74,21 @@ def main():
                     }
                 }
                 data.append(data_point)
+        elif measurement_name=='AlertLog':
+            # Cas des données pour les erreurs alerlog
+            for result in results:
+                data_point = {
+                    "measurement": measurement_name,
+                    "tags": {
+                        "host_name": host_name,
+                        "instance_name": instance_name
+                    },
+                    "time": result[column_names.index('SYSDATE')],
+                    "fields": {
+                        "message_text": int(result[column_names.index('MESSAGE_TEXT')])
+                    }
+                }
+                data.append(data_point)
         elif measurement_name=='Sessions':
             # Cas des données pour les Sessions
             for result in results:
