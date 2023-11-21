@@ -159,10 +159,11 @@ def main():
                         "tablespace_name": result[column_names.index('TABLESPACE_NAME')],
                     },
                     "fields": {
-                        "taille_mib": float(result[column_names.index('TAILLE_MIB')]),
-                        "taille_max_mib": float(result[column_names.index('TAILLE_MAX_MIB')]),
-                        "taille_occupee_mib": float(result[column_names.index('TAILLE_OCCUPEE_MIB')]),
-                        "pct_occupation_theorique": float(result[column_names.index('PCT_OCCUPATION_THEORIQUE')])
+                        "megs_alloc": float(result[column_names.index('MEGS_ALLOC')]),
+                        "megs_used": float(result[column_names.index('MEGS_USED')]),
+                        "megs_free": float(result[column_names.index('MEGS_FREE')]),
+                        "Max": float(result[column_names.index('MAX')]),
+                        "Pct_Used_Max": float(result[column_names.index('PCT_USED_MAX')])
                     }
                 }
                 data.append(data_point)
