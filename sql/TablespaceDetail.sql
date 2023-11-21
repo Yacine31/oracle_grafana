@@ -7,7 +7,7 @@ select
     -- 100 - round((nvl(b.bytes_free, 0) / a.bytes_alloc) * 100) Pct_used,
     -- round((nvl(b.bytes_free, 0) / a.bytes_alloc) * 100) Pct_Free,
     maxbytes Max,
-    (a.bytes_alloc - nvl(b.bytes_free, 0)) / maxbytes * 100) Pct_Used_Max
+    (a.bytes_alloc - nvl(b.bytes_free, 0)) / maxbytes * 100 Pct_Used_Max
     -- 100 - round((a.bytes_alloc - nvl(b.bytes_free, 0)) / maxbytes * 100) Pct_Free_Max
 from
     (
