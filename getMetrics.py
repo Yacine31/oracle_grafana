@@ -48,7 +48,12 @@ def main():
         # Exécution de la requête Oracle
         if args.verbose:
             print(f"Executing Oracle query for measurement: {measurement_name}")
-        oracle_cursor.execute(query)
+        try:
+            oracle_cursor.execute(query)
+        except cx_Oracle.DatabaseError as e:
+            print(f"Error executing Oracle query: {e}")
+            # Passer à l'occurrence suivante de la boucle
+            continue
 
         # Récupération des noms des colonnes
         column_names = [d[0] for d in oracle_cursor.description]
