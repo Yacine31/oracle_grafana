@@ -88,7 +88,7 @@ def main():
                     "measurement": measurement_name,
                     "tags": {
                         "host_name": host_name,
-                        "instance_name": instance_name
+                        "instance_name": instance_name,
                         "file_name": result[column_names.index('FILE_NAME')] 
                     },
                     "fields": {
