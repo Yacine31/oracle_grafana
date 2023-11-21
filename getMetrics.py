@@ -81,6 +81,26 @@ def main():
                     }
                 }
                 data.append(data_point)
+        elif measurement_name=='DatafileInfo':
+            # Cas des données pour les datafile
+            for result in results:
+                data_point = {
+                    "measurement": measurement_name,
+                    "tags": {
+                        "host_name": host_name,
+                        "instance_name": instance_name
+                        "file_name": result[column_names.index('FILE_NAME')], 
+                    },
+                    "fields": {
+                        "tablespace_name": result[column_names.index('TABLESPACE_NAME')],
+                        "bytes": float(result[column_names.index('BYTES')]),
+                        "status": result[column_names.index('STATUS')],
+                        "autoextensible": result[column_names.index('AUTOEXTENSIBLE')],
+                        "maxbytes": float(result[column_names.index('MAXBYTES')]),
+                        "online_status": result[column_names.index('ONLINE_STATUS')]
+                    }
+                }
+                data.append(data_point)
         elif measurement_name=='AlertLog':
             # Cas des données pour les erreurs alerlog
             for result in results:
