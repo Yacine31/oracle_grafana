@@ -1,13 +1,13 @@
 select
     a.tablespace_name,
     -- t.contents,
-    round(a.bytes_alloc / 1024 / 1024) megs_alloc,
-    round((a.bytes_alloc - nvl(b.bytes_free, 0)) / 1024 / 1024) megs_used,
-    round(nvl(b.bytes_free, 0) / 1024 / 1024) megs_free,
+    a.bytes_alloc megs_alloc,
+    a.bytes_alloc - nvl(b.bytes_free, 0) megs_used,
+    nvl(b.bytes_free, 0)  megs_free,
     -- 100 - round((nvl(b.bytes_free, 0) / a.bytes_alloc) * 100) Pct_used,
     -- round((nvl(b.bytes_free, 0) / a.bytes_alloc) * 100) Pct_Free,
-    round(maxbytes / 1048576) Max,
-    round((a.bytes_alloc - nvl(b.bytes_free, 0)) / maxbytes * 100) Pct_Used_Max
+    maxbytes Max,
+    (a.bytes_alloc - nvl(b.bytes_free, 0)) / maxbytes * 100) Pct_Used_Max
     -- 100 - round((a.bytes_alloc - nvl(b.bytes_free, 0)) / maxbytes * 100) Pct_Free_Max
 from
     (
@@ -37,13 +37,13 @@ union all
 select
     h.tablespace_name,
     -- dt.contents,
-    round(sum(h.bytes_free + h.bytes_used) / 1048576) megs_alloc,
-    round(sum(nvl(p.bytes_used, 0)) / 1048576) megs_used,
-    round(sum((h.bytes_free + h.bytes_used) - nvl(p.bytes_used, 0)) / 1048576) megs_free,
+    sum(h.bytes_free + h.bytes_used) megs_alloc,
+    sum(nvl(p.bytes_used, 0)) megs_used,
+    sum((h.bytes_free + h.bytes_used) - nvl(p.bytes_used, 0)) megs_free,
     -- 100 - round((sum((h.bytes_free + h.bytes_used) - nvl(p.bytes_used, 0)) / sum(h.bytes_used + h.bytes_free)) * 100) pct_used,
     -- round((sum((h.bytes_free + h.bytes_used) - nvl(p.bytes_used, 0)) / sum(h.bytes_used + h.bytes_free)) * 100) Pct_Free,
-    round(sum(f.maxbytes) / 1048576) max,
-    round((sum(h.bytes_free + h.bytes_used) - sum((h.bytes_free + h.bytes_used) - nvl(p.bytes_used, 0))) / sum(f.maxbytes) * 100) "Pct_Used%Max"
+    sum(f.maxbytes) max,
+    (sum(h.bytes_free + h.bytes_used) - sum((h.bytes_free + h.bytes_used) - nvl(p.bytes_used, 0))) / sum(f.maxbytes) "Pct_Used%Max"
     -- 100 - round((sum(h.bytes_free + h.bytes_used) - sum((h.bytes_free + h.bytes_used) - nvl(p.bytes_used, 0))) / decode(sum(f.maxbytes),0,sum(h.bytes_free + h.bytes_used),sum(f.maxbytes)) * 100) "Pct_Free%Max"
 from
     sys.v_$temp_space_header h,
