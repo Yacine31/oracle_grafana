@@ -48,6 +48,8 @@ def main():
         # Exécution de la requête Oracle
         if args.verbose:
             print(f"Executing Oracle query for measurement: {measurement_name}")
+        # try : pour passer des requêtes sur les bases standby
+        # en cas d'erreur, on passe à la requêtes suivante
         try:
             oracle_cursor.execute(query)
         except cx_Oracle.DatabaseError as e:
