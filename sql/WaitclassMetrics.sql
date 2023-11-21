@@ -1,8 +1,8 @@
 select
     n.wait_class,
-    avg(m.time_waited / m.INTSIZE_CSEC) AVG_VALUE,
-    min(m.time_waited / m.INTSIZE_CSEC) MIN_VALUE,
-    max(m.time_waited / m.INTSIZE_CSEC) MAX_VALUE
+    nvl(avg(m.time_waited / m.INTSIZE_CSEC),0) AVG_VALUE,
+    nvl(min(m.time_waited / m.INTSIZE_CSEC),0) MIN_VALUE,
+    nvl(max(m.time_waited / m.INTSIZE_CSEC),0) MAX_VALUE
 from
     v$waitclassmetric m, --v$waitclassmetric_history m,
     v$system_wait_class n
@@ -13,9 +13,9 @@ group by
 union
 select
     'CPU',
-    avg(value / 100) AVG_VALUE,
-    min(value / 100) MIN_VALUE,
-    max(value / 100) MAX_VALUE
+    nvl(avg(value / 100),0) AVG_VALUE,
+    nvl(min(value / 100),0) MIN_VALUE,
+    nvl(max(value / 100),0) MAX_VALUE
 from
     v$sysmetric_history
 where
