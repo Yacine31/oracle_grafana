@@ -74,6 +74,25 @@ def main():
                     }
                 }
                 data.append(data_point)
+        elif measurement_name=='DatabaseInfo':
+            # Cas des données infos de la base et l'instance
+            for result in results:
+                data_point = {
+                    "measurement": measurement_name,
+                    "tags": {
+                        "host_name": host_name,
+                        "instance_name": instance_name
+                    },
+                    "fields": {
+                        "startup_time": result[column_names.index('STARTUP_TIME')],
+                        "database_role": result[column_names.index('DATABASE_ROLE')],
+                        "status": result[column_names.index('STATUS')],
+                        "open_mode": result[column_names.index('OPEN_MODE')],
+                        "logins": result[column_names.index('LOGINS')],
+                        "archivelog": result[column_names.index('ARCHIVELOG')]
+                    }
+                }
+                data.append(data_point)
         elif measurement_name=='AlertLog':
             # Cas des données pour les erreurs alerlog
             for result in results:
