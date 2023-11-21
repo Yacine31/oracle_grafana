@@ -89,7 +89,7 @@ def main():
                         "status": result[column_names.index('STATUS')],
                         "open_mode": result[column_names.index('OPEN_MODE')],
                         "logins": result[column_names.index('LOGINS')],
-                        "archivelog": result[column_names.index('ARCHIVELOG')]
+                        "log_mode": result[column_names.index('LOG_MODE')]
                     }
                 }
                 data.append(data_point)
