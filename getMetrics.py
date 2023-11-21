@@ -94,6 +94,7 @@ def main():
                     "fields": {
                         "tablespace_name": result[column_names.index('TABLESPACE_NAME')],
                         "bytes": float(result[column_names.index('BYTES')]),
+                        "maxbytes": float(result[column_names.index('MAXBYTES')]),
                         "status": result[column_names.index('STATUS')],
                         "autoextensible": result[column_names.index('AUTOEXTENSIBLE')],
                         "percent_used": float(result[column_names.index('PERCENT_USED')]),
