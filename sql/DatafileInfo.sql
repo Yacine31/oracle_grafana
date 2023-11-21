@@ -4,8 +4,6 @@ SELECT
        bytes, 
        status, 
        autoextensible, 
-       maxbytes, 
+       round((x.bytes/x.maxbytes)*100,2) percent_used, 
        online_status
   FROM dba_data_files
- ORDER BY
-           file_name

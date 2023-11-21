@@ -96,7 +96,7 @@ def main():
                         "bytes": float(result[column_names.index('BYTES')]),
                         "status": result[column_names.index('STATUS')],
                         "autoextensible": result[column_names.index('AUTOEXTENSIBLE')],
-                        "maxbytes": float(result[column_names.index('MAXBYTES')]),
+                        "percent_used": float(result[column_names.index('PERCENT_USED')]),
                         "online_status": result[column_names.index('ONLINE_STATUS')]
                     }
                 }
