@@ -89,7 +89,7 @@ def main():
                     "tags": {
                         "host_name": host_name,
                         "instance_name": instance_name
-                        "file_name": result[column_names.index('FILE_NAME')], 
+                        "file_name": result[column_names.index('FILE_NAME')] 
                     },
                     "fields": {
                         "tablespace_name": result[column_names.index('TABLESPACE_NAME')],
