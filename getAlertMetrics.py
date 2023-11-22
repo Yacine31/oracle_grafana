@@ -83,7 +83,7 @@ def main():
                         "message_text": result[column_names.index('MESSAGE_TEXT')]
                     }
                 }
-                data.insert(data_point)
+                data.append(data_point)
                 # Affichage du dictionnaire complet après la boucle
                 print("Data Points:")
                 for data_point in data:
