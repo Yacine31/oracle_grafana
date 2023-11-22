@@ -9,11 +9,12 @@
 --        online_status
 --   FROM dba_data_files
 
+
 select
     d.file_name,
-    a.bytes_alloc megs_alloc,
-    a.bytes_alloc - nvl(b.bytes_free, 0) megs_used,
-    nvl(b.bytes_free, 0)  megs_free,
+    a.bytes_alloc file_size,
+    a.bytes_alloc - nvl(b.bytes_free, 0) space_used,
+    nvl(b.bytes_free, 0)  space_free,
     a.maxbytes maxsize,
     (a.bytes_alloc - nvl(b.bytes_free, 0)) / a.maxbytes * 100 percent_used
 from
