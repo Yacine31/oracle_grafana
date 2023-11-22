@@ -63,6 +63,10 @@ def main():
         # Récupération de toutes les lignes
         results = oracle_cursor.fetchall()
 
+        # Connexion à InfluxDB
+        print(f"Connecting to InfluxDB at {args.influxdb_host}:{args.influxdb_port} for database: {args.influxdb_database}")
+        influxdb_client = InfluxDBClient(args.influxdb_host, args.influxdb_port, database=args.influxdb_database)
+
         # Création des données à injecter dans InfluxDB
         data = []
 
@@ -84,10 +88,6 @@ def main():
                 for data_point in data:
                    print(data_point)
                 # fin ajout debug
-
-                # Connexion à InfluxDB
-                print(f"Connecting to InfluxDB at {args.influxdb_host}:{args.influxdb_port} for database: {args.influxdb_database}")
-                influxdb_client = InfluxDBClient(args.influxdb_host, args.influxdb_port, database=args.influxdb_database)
 
                 # Écriture des données dans InfluxDB
                 print(f"Writing data to InfluxDB for measurement: {measurement_name}")
