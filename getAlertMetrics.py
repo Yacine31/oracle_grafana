@@ -83,17 +83,17 @@ def main():
                         "message_text": result[column_names.index('MESSAGE_TEXT')]
                     }
                 }
-                data.append(data_point)
+                # data.append(data_point)
                 # Affichage du dictionnaire complet après la boucle
                 print("Data Points:")
-                for data_point in data:
-                   print(data_point)
+                # for data_point in data:
+                print(data_point)
                 # fin ajout debug
 
                 # Écriture des données dans InfluxDB
                 print(f"Writing data to InfluxDB for measurement: {measurement_name}")
-                influxdb_client.write_points(data)
-
+                # influxdb_client.write_points(data)
+                influxdb_client.write_points([data_point])
 
         # Fermeture de la connexion InfluxDB
         influxdb_client.close()
