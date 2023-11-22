@@ -39,4 +39,4 @@ from
     ) b,
     dba_data_files d
 where
-    a.file_id = b.file_id (+) and d.file_id=b.file_id
+    a.file_id = b.file_id (+) and d.file_id=a.file_id
