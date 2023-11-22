@@ -94,8 +94,8 @@ def main():
                     "fields": {
                         "file_size": float(result[column_names.index('FILE_SIZE')]),
                         "maxsize": float(result[column_names.index('MAXSIZE')]),
-                        "space_used": result[column_names.index('SPACE_USED')],
-                        "space_free": result[column_names.index('SPACE_FREE')],
+                        "space_used": float(result[column_names.index('SPACE_USED')]),
+                        "space_free": float(result[column_names.index('SPACE_FREE')]),
                         "percent_used": float(result[column_names.index('PERCENT_USED')])
                     }
                 }
