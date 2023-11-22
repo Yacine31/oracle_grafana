@@ -92,13 +92,11 @@ def main():
                         "file_name": result[column_names.index('FILE_NAME')] 
                     },
                     "fields": {
-                        "tablespace_name": result[column_names.index('TABLESPACE_NAME')],
-                        "bytes": float(result[column_names.index('BYTES')]),
-                        "maxbytes": float(result[column_names.index('MAXBYTES')]),
-                        "status": result[column_names.index('STATUS')],
-                        "autoextensible": result[column_names.index('AUTOEXTENSIBLE')],
-                        "percent_used": float(result[column_names.index('PERCENT_USED')]),
-                        "online_status": result[column_names.index('ONLINE_STATUS')]
+                        "file_size": float(result[column_names.index('FILE_SIZE')]),
+                        "maxsize": float(result[column_names.index('MAXSIZE')]),
+                        "space_used": result[column_names.index('SPACE_USED')],
+                        "space_free": result[column_names.index('SPACE_FREE')],
+                        "percent_used": float(result[column_names.index('PERCENT_USED')])
                     }
                 }
                 data.append(data_point)
