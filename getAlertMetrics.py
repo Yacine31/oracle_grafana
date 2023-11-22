@@ -73,7 +73,7 @@ def main():
         if measurement_name=='AlertLog':
             # Cas des données pour les erreurs alerlog
             for result in results:
-                data = {
+                data_point = {
                     "measurement": measurement_name,
                     "tags": {
                         "host_name": host_name,
@@ -83,6 +83,7 @@ def main():
                         "message_text": result[column_names.index('MESSAGE_TEXT')]
                     }
                 }
+                data.insert(data_point)
                 # Affichage du dictionnaire complet après la boucle
                 print("Data Points:")
                 for data_point in data:
