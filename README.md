@@ -28,6 +28,10 @@ Pour l'exécuter dans une boucle (dans screen) :
 while true; do sh getMetrics.sh; echo "---- $(date) ----"; sleep 60; done
 ```
 
+Pour le mettre dans cron pour une exécution toutes les 5 minutes : 
+```bash
+*/5 * * * * sh /home/oracle/oracle_grafana/getMetrics.sh
+```
 ## Pour ajouter de nouvelles fonctionnalités : 
 - créer un script sql et le mettre dans le répertoire sql
 - le nom du script va correspond à la "table" créée dans influxdb
