@@ -1,7 +1,7 @@
 # oracle_grafana
- monitorin Oracle avec Grafana/Telegraf/Influxdb
+monitoring Oracle avec Grafana/Telegraf/Influxdb
 
-Pour collecter les infos : 
+## Pour collecter les infos : 
 
 Se connecter avec le compte oracle :
 
@@ -28,8 +28,7 @@ Pour l'exécuter dans une boucle (dans screen) :
 while true; do sh getMetrics.sh; echo "---- $(date) ----"; sleep 60; done
 ```
 
-=====
-Pour ajouter de nouvelles fonctionnalité : 
+## Pour ajouter de nouvelles fonctionnalité : 
 - créer un script sql et le mettre dans le répertoire sql
 - le nom du script va correspond à la "table" créée dans influxdb
 - créer un nouveau dashboard ou un nouveau bloc dans un dashboard grafana existant
