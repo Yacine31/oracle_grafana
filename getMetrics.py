@@ -166,6 +166,21 @@ def main():
                     }
                 }
                 data.append(data_point)
+        elif measurement_name=='DatabaseSizeDetail':
+            # Cas des données pour les tablespaces avec detail
+            for result in results:
+                data_point = {
+                    "measurement": measurement_name,
+                    "tags": {
+                        "host_name": host_name,
+                        "instance_name": instance_name,
+                        "file_type": result[column_names.index('FILE_TYPE')],
+                    },
+                    "fields": {
+                        "bytes": float(result[column_names.index('bytes')])
+                    }
+                }
+                data.append(data_point)
         elif measurement_name=='TablespaceInfo':
             # Cas des données pour les tablespaces
             for result in results:
