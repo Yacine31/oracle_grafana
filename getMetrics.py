@@ -177,7 +177,7 @@ def main():
                         "file_type": result[column_names.index('FILE_TYPE')],
                     },
                     "fields": {
-                        "bytes": float(result[column_names.index('bytes')])
+                        "bytes": float(result[column_names.index('BYTES')])
                     }
                 }
                 data.append(data_point)
