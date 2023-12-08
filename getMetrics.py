@@ -221,6 +221,21 @@ def main():
                     }
                 }
                 data.append(data_point)
+        elif measurement_name=='AlertLog_Count':
+            # Cas des données pour les AlertLog_Count
+            for result in results:
+                data_point = {
+                    "measurement": measurement_name,
+                    "tags": {
+                        "host_name": host_name,
+                        "instance_name": instance_name,
+                        "date_jour": result[column_names.index('DATE_JOUR')],
+                    },
+                    "fields": {
+                        "nb_erreurs": result[column_names.index('NB_ERREURS')]
+                    }
+                }
+                data.append(data_point)
         else:
             # Itération sur chaque ligne
             for result in results:
