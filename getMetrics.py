@@ -100,6 +100,31 @@ def main():
                     }
                 }
                 data.append(data_point)
+        elif measurement_name=='ActiveSessionHistory':
+            # Cas des données pour Active Session History
+            for result in results:
+                data_point = {
+                    "measurement": measurement_name,
+                    "tags": {
+                        "host_name": host_name,
+                        "instance_name": instance_name,
+                        "session_state": result[column_names.index('SESSION_STATE')], 
+                        "wait_class": result[column_names.index('WAIT_CLASS')], 
+                        "event": result[column_names.index('EVENT')], 
+                    },
+                    "fields": {
+                        "sample_id": result[column_names.index('SAMPLE_ID')],
+                        "sample_time": result[column_names.index('SAMPLE_TIME')],
+                        "session_id": result[column_names.index('SESSION_ID')],
+                        "session_serial#": result[column_names.index('SESSION_SERIAL#')],
+                        "session_type": result[column_names.index('SESSION_TYPE')],
+                        "wait_time": result[column_names.index('WAIT_TIME')],
+                        "session_state": result[column_names.index('SESSION_STATE')],
+                        "time_waited": result[column_names.index('TIME_WAITED')],
+                        "blocking_session_status": result[column_names.index('BLOCKING_SESSION_STATUS')]
+                    }
+                }
+                data.append(data_point)
         elif measurement_name=='AlertLog':
             # Cas des données pour les erreurs alerlog
             for result in results:
