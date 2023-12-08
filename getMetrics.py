@@ -118,9 +118,9 @@ def main():
                         "session_id": result[column_names.index('SESSION_ID')],
                         "session_serial#": result[column_names.index('SESSION_SERIAL#')],
                         "session_type": result[column_names.index('SESSION_TYPE')],
-                        "wait_time": result[column_names.index('WAIT_TIME')],
+                        "wait_time": int(result[column_names.index('WAIT_TIME')]),
                         "session_state": result[column_names.index('SESSION_STATE')],
-                        "time_waited": result[column_names.index('TIME_WAITED')],
+                        "time_waited": int(result[column_names.index('TIME_WAITED')]),
                         "blocking_session_status": result[column_names.index('BLOCKING_SESSION_STATUS')]
                     }
                 }
