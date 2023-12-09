@@ -263,7 +263,7 @@ def main():
         # Connexion à InfluxDB
         if args.verbose:
             print(f"Connecting to InfluxDB at http://{args.influxdb_host}:{args.influxdb_port}")
-        write_api = client.write_api(write_options=SYNCHRONOUS)
+        # write_api = client.write_api(write_options=SYNCHRONOUS)
         write_client = influxdb_client.InfluxDBClient(url="http://{args.influxdb_host}:{args.influxdb_port}", token=token, org="args.influxdb_org")
 
         # if args.verbose:
