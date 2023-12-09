@@ -1,5 +1,5 @@
 import cx_Oracle
-from influxdb import InfluxDBClient
+# from influxdb import InfluxDBClient
 import os
 import argparse
 import influxdb_client, os, time
