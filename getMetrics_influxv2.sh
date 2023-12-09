@@ -11,6 +11,6 @@ do
 
         export INFLUXDB_TOKEN=KDDLLyCQ7TzdnW0zr1d0g2C3JbwvX1hgsyJb27DGnVwH8TFp9DUfaIqnC29y6HtWQyODajT20uFpO76AEQNyDw==
 
-        /usr/bin/python3 ${script_dir}/getMetrics_influxv2.py --sid $r --verbose --influxdb-host srvorap --influxdb-port 8087 --influxdb-org homelab --influxdb-database influx --sql-directory ${script_dir}/sql
+        /usr/bin/python3 ${script_dir}/getMetrics_influxv2.py --sid $r --verbose --influxdb-host srvorap --influxdb-port 8087 --influxdb-org homelab --sql-directory ${script_dir}/sql
 
 done
