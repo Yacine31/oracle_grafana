@@ -1,28 +1,27 @@
 import cx_Oracle
-# from influxdb import InfluxDBClient
+from influxdb_client import InfluxDBClient
+from influxdb_client.client.write_api import SYNCHRONOUS
 import os
 import argparse
-import influxdb_client, os, time
-from influxdb_client import InfluxDBClient, Point, WritePrecision
-from influxdb_client.client.write_api import SYNCHRONOUS
 
 def main():
     parser = argparse.ArgumentParser(description='Script to execute SQL queries and insert results into InfluxDB.')
     parser.add_argument('--influxdb-host', required=True, help='InfluxDB host')
     parser.add_argument('--influxdb-port', required=True, help='InfluxDB port')
-    parser.add_argument('--influxdb-org', required=True, help='InfluxDB org name')
+    parser.add_argument('--influxdb-token', required=True, help='InfluxDB token')
+    parser.add_argument('--influxdb-org', required=True, help='InfluxDB organization')
+    parser.add_argument('--influxdb-bucket', required=True, help='InfluxDB bucket')
     parser.add_argument('--sql-directory', required=True, help='Directory containing SQL files')
     parser.add_argument('--sid', required=True, help='Oracle SID')
     parser.add_argument('--verbose', action='store_true', help='Enable verbose mode')
 
     args = parser.parse_args()
-    token = os.environ.get("INFLUXDB_TOKEN")
 
     # Connexion à la base de données Oracle
     if args.verbose:
         print(f"Connecting to Oracle database at / as sysdba ")
     os.environ["ORACLE_SID"] = args.sid
-    oracle_connection = cx_Oracle.connect( '/', mode = cx_Oracle.SYSDBA)
+    oracle_connection = cx_Oracle.connect('/', mode=cx_Oracle.SYSDBA)
     oracle_cursor = oracle_connection.cursor()
     oracle_cursor.execute("select HOST_NAME, INSTANCE_NAME from v$instance")
     for row in oracle_cursor:
@@ -34,6 +33,9 @@ def main():
 
     # Liste des fichiers SQL dans le répertoire
     sql_files = [f for f in os.listdir(args.sql_directory) if f.endswith(".sql")]
+
+    # Connexion à InfluxDB
+    influxdb_client = InfluxDBClient(url=f"http://{args.influxdb_host}:{args.influxdb_port}", token=args.influxdb_token, org=args.influxdb_org)
 
     # Itération sur chaque fichier SQL
     for sql_file in sql_files:
@@ -242,7 +244,13 @@ def main():
                 data.append(data_point)
         else:
             # Itération sur chaque ligne
+
             for result in results:
+                data_point = Point(measurement_name) \
+                    .tag("host_name", host_name) \
+                    .tag("instance_name", instance_name) \
+                    .field("size_mb", float(result[column_names.index('SIZE_MB')]))
+                # Ajoutez d'autres tags et champs au besoin
                 data_point = {
                     "measurement": measurement_name,
                     "tags": {
@@ -260,26 +268,15 @@ def main():
            print(data_point)
         # fin ajout debug
 
-        # Connexion à InfluxDB
-        if args.verbose:
-            print(f"Connecting to InfluxDB at http://{args.influxdb_host}:{args.influxdb_port}")
-        # write_api = client.write_api(write_options=SYNCHRONOUS)
-        write_client = influxdb_client.InfluxDBClient(url="http://{args.influxdb_host}:{args.influxdb_port}", token=token, org="args.influxdb_org")
-
-        # if args.verbose:
-        #     print(f"Connecting to InfluxDB at {args.influxdb_host}:{args.influxdb_port} for database: {args.influxdb_database}")
-        # influxdb_client = InfluxDBClient(args.influxdb_host, args.influxdb_port, database=args.influxdb_database)
-
         # Écriture des données dans InfluxDB
-        bucket="homelab"
-
         if args.verbose:
             print(f"Writing data to InfluxDB for measurement: {measurement_name}")
-        write_api = write_client.write_api(write_options=SYNCHRONOUS)
-        write_api.write(bucket=bucket, org="oracle", record=data)
+        with influxdb_client.write_api(write_options=SYNCHRONOUS) as write_api:
+            write_api.write(bucket=args.influxdb_bucket, record=data)
 
         # Fermeture de la connexion InfluxDB
-        influxdb_client.close()
+
+    influxdb_client.__del__()
 
     # Fermeture de la connexion Oracle
     oracle_cursor.close()
@@ -287,4 +284,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
