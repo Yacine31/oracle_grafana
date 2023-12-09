@@ -244,13 +244,7 @@ def main():
                 data.append(data_point)
         else:
             # Itération sur chaque ligne
-
             for result in results:
-                data_point = Point(measurement_name) \
-                    .tag("host_name", host_name) \
-                    .tag("instance_name", instance_name) \
-                    .field("size_mb", float(result[column_names.index('SIZE_MB')]))
-                # Ajoutez d'autres tags et champs au besoin
                 data_point = {
                     "measurement": measurement_name,
                     "tags": {
