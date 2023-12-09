@@ -275,7 +275,7 @@ def main():
 
         if args.verbose:
             print(f"Writing data to InfluxDB for measurement: {measurement_name}")
-        write_api = client.write_api(write_options=SYNCHRONOUS)
+        # write_api = client.write_api(write_options=SYNCHRONOUS)
         write_api.write_points(bucket=bucket, org="oracle", record=data)
 
         # Fermeture de la connexion InfluxDB
