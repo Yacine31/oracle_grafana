@@ -1,4 +1,4 @@
-select count(*) from  v$Lock where block=1 
+select count(*) BlokingSessionsCount from  v$Lock where block=1 
 -- SELECT /*+ RULE */
 --     s.username,
 --     s.osuser "OS_USER",
