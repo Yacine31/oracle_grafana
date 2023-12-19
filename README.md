@@ -37,4 +37,13 @@ Pour le mettre dans cron pour une exécution toutes les 5 minutes :
 - le nom du script va correspond à la "table" créée dans influxdb
 - créer un nouveau dashboard ou un nouveau bloc dans un dashboard grafana existant
 
+## déploiement par Ansible : 
+Le fichier host.txt contient le nom ou l'ip du serveur cible :
+```ini
+[all]
+srv-oracle
+```
 
+```bash
+ansible-playbook -v -i host.txt install_oracle_grafana.yml --ask-pass -u oracle -e 'ansible_python_interpreter=/usr/bin/python3' -e 'ansible_python_interpreter=/usr/bin/python3'
+```
