@@ -20,12 +20,7 @@ sh getMetrics.sh
 
 Il appelle le script : 
 ```bash
-	getMetrics.py --sid ORCL --influxdb-host srvorap --influxdb-port 8086 --influxdb-database influx --sql-directory sql
-```
-
-Pour l'exécuter dans une boucle (dans screen) :
-```bash
-while true; do sh getMetrics.sh; echo "---- $(date) ----"; sleep 60; done
+/usr/bin/python3 ${SCRIPT_DIR}/getMetrics.py --sid $sid --verbose --influxdb-host ${INFLUX_HOST} --influxdb-port ${INFLUX_PORT} --influxdb-database ${INFLUX_DB} --sql-directory ${SCRIPT_DIR}/sql
 ```
 
 Pour le mettre dans cron pour une exécution toutes les 5 minutes : 
@@ -38,11 +33,17 @@ Pour le mettre dans cron pour une exécution toutes les 5 minutes :
 - créer un nouveau dashboard ou un nouveau bloc dans un dashboard grafana existant
 
 ## déploiement par Ansible : 
-Le fichier host.txt contient le nom ou l'ip du serveur cible :
+Aller dans le répertoire ansible :
+
+Le fichier host.txt doit contenir le nom ou l'ip du serveur cible ou des serveurs cibles :
 ```ini
 [all]
-srv-oracle
+srv-oracle-1
+srv-oracle-2
+srv-oracle-3
 ```
+
+Déploiement : le mot de passe demandé est celui du compte "oracle"
 
 ```bash
 ansible-playbook -v -i host.txt install_oracle_grafana.yml --ask-pass -u oracle -e 'ansible_python_interpreter=/usr/bin/python3' -e 'ansible_python_interpreter=/usr/bin/python3'

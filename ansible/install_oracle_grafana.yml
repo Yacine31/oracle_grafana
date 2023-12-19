@@ -1,0 +1,34 @@
+---
+- name: Install Oracle Grafana
+  hosts: all
+  become: true  # Pour exécuter les tâches avec les privilèges d'administrateur (sudo)
+  become_user: oracle  # Pour exécuter les tâches en tant qu'utilisateur oracle
+
+  tasks:
+    - name: Télécharger get-pip.py
+      get_url:
+        url: https://bootstrap.pypa.io/pip/3.6/get-pip.py
+        dest: /tmp/get-pip.py
+
+    - name: Installer pip
+      command: python3 /tmp/get-pip.py
+      args:
+        creates: /usr/local/bin/pip  # Éviter de réexécuter si déjà installé
+
+    - name: Installer cx-Oracle et InfluxDB
+      pip:
+        name:
+          - cx-Oracle
+          - influxdb
+
+    - name: Cloner le dépôt Git
+      git:
+        repo: https://github.com/Yacine31/oracle_grafana
+        dest: /home/oracle/oracle_grafana
+
+    - name: Ajouter la tâche au crontab
+      cron:
+        name: "Execute getMetrics.sh"
+        minute: "*/5"
+        job: "sh /home/oracle/oracle_grafana/getMetrics.sh 2>&1 1>/dev/null"
+        user: oracle
