@@ -89,9 +89,10 @@ def main():
                     "tags": {
                         "host_name": host_name,
                         "instance_name": instance_name,
-                        "file_name": result[column_names.index('FILE_NAME')] 
+                        "file_name": result[column_names.index('FILE_NAME')]
                     },
                     "fields": {
+                        "tablepsace_name": result[column_names.index('TABLESPACE_NAME')], 
                         "file_size": float(result[column_names.index('FILE_SIZE')]),
                         "maxsize": float(result[column_names.index('MAXSIZE')]),
                         "space_used": float(result[column_names.index('SPACE_USED')]),
