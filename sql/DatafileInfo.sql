@@ -12,6 +12,7 @@
 
 select
     d.file_name,
+    d.tablespace_name,
     a.bytes_alloc file_size,
     a.bytes_alloc - nvl(b.bytes_free, 0) space_used,
     nvl(b.bytes_free, 0)  space_free,
