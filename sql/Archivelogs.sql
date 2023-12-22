@@ -12,7 +12,7 @@
 -- order by 
 --     completion_time,dest_id
 
--- on compte le nombre d'archivelog de la dernière heure
+-- on compte le nombre d'archivelog de la dernière heure 
 select 
     to_char(first_time, 'HH24') "Heure",
     count(1) "Total"
