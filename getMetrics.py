@@ -230,7 +230,6 @@ def main():
                     "tags": {
                         "host_name": host_name,
                         "instance_name": instance_name,
-                        "date_jour": result[column_names.index('DATE_JOUR')],
                     },
                     "fields": {
                         "nb_erreurs": result[column_names.index('NB_ERREURS')]
