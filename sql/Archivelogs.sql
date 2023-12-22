@@ -12,11 +12,12 @@
 -- order by 
 --     completion_time,dest_id
 
--- on compte le nombre d'archivelog de la dernière heure 
+-- on compte le nombre d'archivelog et la taille de la dernière heure 
 select 
     to_char(first_time, 'HH24') "Heure",
+    sum(blocks*block_size) "Taille",
     count(1) "Total"
-from v$log_history
+from v$archived_log
 where 
     -- l'heure est l'heure actuelle
     to_char(first_time, 'HH24') = to_char(systimestamp, 'HH24')
