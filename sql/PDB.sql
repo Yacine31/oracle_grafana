@@ -1,0 +1,1 @@
+select count(*) pdb_count from DBA_PDBS where PDB_NAME <> 'PDB$SEED' 
