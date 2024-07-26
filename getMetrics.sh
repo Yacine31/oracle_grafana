@@ -15,7 +15,7 @@ fi
 source "$ENV_FILE"
 
 # mise à jour des scripts depuis le dépôt git
-cd ${SCRIPT_DIR}
+cd ${SCRIPTS_DIR}
 git pull
 
 # on boucle sur toutes les bases ouvertes pour envoyer les métriques ver influxdb
@@ -25,6 +25,6 @@ do
         export ORACLE_HOME=$(cat /etc/oratab | grep "^$sid:" | cut -d: -f2)
         export LD_LIBRARY_PATH=$ORACLE_HOME/lib
 
-        /usr/bin/python3 ${SCRIPT_DIR}/getMetrics.py --sid $sid --verbose --influxdb-host ${INFLUX_HOST} --influxdb-port ${INFLUX_PORT} --influxdb-database ${INFLUX_DB}  --sql-directory ${SCRIPT_DIR}/sql
+        /usr/bin/python3 ${SCRIPTS_DIR}/getMetrics.py --sid $sid --verbose --influxdb-host ${INFLUX_HOST} --influxdb-port ${INFLUX_PORT} --influxdb-database ${INFLUX_DB}  --sql-directory ${SCRIPTS_DIR}/sql
 
 done
